@@ -1,0 +1,71 @@
+{
+  "info": {
+    "name": "Image Processing Service API",
+    "description": "Collection for testing the Image Processing Service APIs",
+    "_postman_id": "unique-postman-id",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Upload CSV",
+      "request": {
+        "url": "http://localhost:3000/api/upload",
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "csv",
+              "type": "file",
+              "src": []
+            }
+          ]
+        },
+        "description": "Upload a CSV file for processing"
+      },
+      "response": []
+    },
+    {
+      "name": "Check Status",
+      "request": {
+        "url": "http://localhost:3000/api/status/{{requestId}}",
+        "method": "GET",
+        "header": [],
+        "description": "Check the status of a processing request"
+      },
+      "response": []
+    },
+    {
+      "name": "Webhook (Bonus)",
+      "request": {
+        "url": "http://localhost:3000/api/webhook/request/:requestId",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"requestId\": \"{{requestId}}\",\n  \"status\": \"completed\",\n  \"outputCsvUrl\": \"https://example.com/output.csv\"\n}"
+        },
+        "description": "Webhook endpoint for receiving processing updates"
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "requestId",
+      "value": "your-request-id-here",
+      "type": "string"
+    }
+  ]
+}
